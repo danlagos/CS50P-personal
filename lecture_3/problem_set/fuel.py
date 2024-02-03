@@ -3,13 +3,15 @@ def main():
     fuel_gauge(numerator, denominator)
     
 def take_input():
-    try:
-        numerator, denominator = input("Fraction: ").split('/')
-        # Convert to integers to validate input
-        numerator = int(numerator)
-        denominator = int(denominator)
-    except ZeroDivisionError:
-        pass
+    while True:
+            try:
+                numerator, denominator = input("Fraction: ").split('/')
+                # Convert to integers to validate input
+                numerator = int(numerator)
+                denominator = int(denominator)
+                break
+            except ZeroDivisionError:
+                print("denominator cannot be 0")
     
     while check_input_numerator(numerator, denominator) == False:
         numerator, denominator = input("Fraction: ").split('/')
