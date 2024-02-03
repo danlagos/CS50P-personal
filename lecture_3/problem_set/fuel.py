@@ -4,29 +4,27 @@ def main():
     
 def take_input():
     while True:
-            try:
-                numerator, denominator = input("Fraction: ").split('/')
-                # Convert to integers to validate input
-                numerator = int(numerator)
-                denominator = int(denominator)
-                break
-            except ZeroDivisionError:
-                print("denominator cannot be 0")
-    
-    while check_input_numerator(numerator, denominator) == False:
-        numerator, denominator = input("Fraction: ").split('/')
-        numerator = int(numerator)
-        denominator = int(denominator)
-        
-    return numerator, denominator
+        user_input = input("Fraction: ")
+        try:
+            numerator, denominator = map(int, user_input.split('/'))
+            if is_fraction_valid(numerator, denominator):
+                return numerator, denominator
+            else:
+                print("denominator cannot be zero, and numerator must not be larger than denominator")
+        except ValueError:
+            print("Please enter both numerator and denominator as integers.")
 
-def check_input_numerator(numerator, denominator):
-    if numerator < 0 or denominator <= 0:
-        print("Invalid input")
+
+def is_fraction_valid(numerator, denominator):
+    if ((numerator > denominator) or (denominator == 0) or (denominator < 0) or (numerator < 0)):
+        print("denominator cannot be zero, denominator must be larger than numerator.  Cannot input negative numbers")
         return False
+    else:
+        return True
 
 def fuel_gauge(numerator, denominator):
     fuel_in_tank = numerator/denominator
+    
     if fuel_in_tank <= 0.01:
         print("E")
     elif fuel_in_tank >= 0.99:
