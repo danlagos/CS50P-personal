@@ -14,7 +14,6 @@ def take_input():
         except ValueError:
             print("Please enter both numerator and denominator as integers.")
 
-
 def is_fraction_valid(numerator, denominator):
     if ((numerator > denominator) or (denominator == 0) or (denominator < 0) or (numerator < 0)):
         print("denominator cannot be zero, denominator must be larger than numerator.  Cannot input negative numbers")
