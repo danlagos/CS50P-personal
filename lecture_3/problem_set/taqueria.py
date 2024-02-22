@@ -3,14 +3,14 @@ def main():
     total_price = 0.0
         
     while True:
-        # try to take order, if EOFError or a Keyboard innterupt print total price and break loop
+        # try to take order, if EOFError or a Keyboard innterupt print total price and break loop.  This creates a method for ending the program.
         try: 
             price = take_order()
         except (EOFError, KeyboardInterrupt):
             print(f"Total: ${total_price}")
             break
            
-        # if price contains invalid input, print total, otherwise add price to total price. 
+        # if price contains invalid input, print total, otherwise add price to total price. This keeps the tally of the total price and handles invalid input.
         if price == None:
             print(f"Total: ${total_price}")
         else:
