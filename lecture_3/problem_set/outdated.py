@@ -1,34 +1,31 @@
 def main():
     """
-    - Initialize a variable to hold the parsed date components.
-    - While the parsed date components are not valid (use a loop):
-    - Get user input using get_user_input().
-    - Try to parse the user input with parse_date().
-        - If parsing is successful, store the parsed components (break the loop).
-        - If parsing fails, print an error message and prompt again.
-    - Once valid date components are obtained, format the date using format_date().
-    - Print the formatted date.
+    Start a loop that continues until a valid date is successfully processed.
+    Call get_user_input() and store the returned value in a variable.
+    Call parse_date() with the user input as an argument. Store the returned date components (if any) in a variable.
+    If parse_date() successfully returns date components (indicated by a non-error state), call format_date() with these components.
+    Print the returned value from format_date(), which should be the date in "YYYY-MM-DD" format.
+    Break the loop, ending the program, if the date has been successfully formatted. Otherwise, continue prompting the user.
     """
     pass
 
 def get_user_input():
     """
-    - Prompt the user for a date input.
-    - Return the user input.
+    Prompt the user for a date input.
+    Return the user's input.
     """
     pass
 
 def parse_date(user_input):
     """
-    - Check if the input is in MM/DD/YYYY format or Month DD, YYYY format.
-    - For MM/DD/YYYY format:
-        - Split the input based on "/" to extract month, day, and year.
-    - For Month DD, YYYY format:
-        - Split the input based on spaces and comma to extract month, day, and year.
-        - Convert the month from text to a number (e.g., January to 1).
-    - Validate the extracted components (ensure month is 1-12, day is 1-31).
-    - If validation fails, return an error or a value indicating failure.
-    - Return the parsed date components (year, month, day) if valid.
+    Check if user_input matches the numeric "MM/DD/YYYY" format.
+        If yes, split the input by "/" to extract the month, day, and year.
+            Convert these components into integers or keep them as strings but ensure they are valid (e.g., month is between 1 and 12).
+            Return these components as a tuple or a dictionary.
+        If the first check fails, check if user_input matches the "Month DD, YYYY" format.
+            If yes, identify the month, day, and year components, converting the month name to its numeric equivalent (e.g., "January" to 1).
+            Return these components as a tuple or a dictionary.
+        If neither format matches, return an error state or None to indicate failure.
     """
     pass
 
