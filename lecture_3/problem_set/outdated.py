@@ -9,7 +9,13 @@ def main():
     Print the returned value from format_date(), which should be the date in "YYYY-MM-DD" format.
     Break the loop, ending the program, if the date has been successfully formatted. Otherwise, continue prompting the user.
     """
-    pass
+    while True:
+        user_input = get_user_input()
+        date_components = parse_date(user_input)
+        if date_components:
+            formatted_date = format_date(date_components)
+            print(formatted_date)
+            break
 
 def get_user_input():
     """
@@ -67,5 +73,5 @@ def format_date(date_components):
     # Return the formatted date string
     return formatted_date
 
-
-main()
+if __name__ == "__main__":
+    main()
