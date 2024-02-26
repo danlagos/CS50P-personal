@@ -33,15 +33,16 @@ def parse_date(user_input):
     textual_date_pattern = re.compile(r"([a-zA-Z]+) (\d{1,2}), (\d{4})")
 
     # List of month names to help convert textual month to numeric
-    months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    months = ["January", "February", "March", "April", "May", "June",
+              "July", "August", "September", "October", "November", "December"]
 
     # Check for numeric "MM/DD/YYYY" format
     numeric_match = numeric_date_pattern.match(user_input)
     if numeric_match:
         month, day, year = numeric_match.groups()
         month, day, year = int(month), int(day), int(year)
-        # Validate the components (e.g., month is between 1 and 12)
-        if 1 <= month <= 12:
+        # Basic validation: month is between 1 and 12, day is between 1 and 31
+        if 1 <= month <= 12 and 1 <= day <= 31:
             return {"month": month, "day": day, "year": year}
     
     # Check for "Month DD, YYYY" format
@@ -51,9 +52,10 @@ def parse_date(user_input):
         day, year = int(day), int(year)
         if month_name in months:
             month = months.index(month_name) + 1  # Convert month name to its numeric equivalent
+            # No need for day validation here since "1 <= day <= 31" check is common for both formats
             return {"month": month, "day": day, "year": year}
 
-    # If neither format matches, return an error state or None
+    # If neither format matches, or validation fails, return None
     return None
 
 def format_date(date_components):
