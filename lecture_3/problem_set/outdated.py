@@ -1,3 +1,5 @@
+import re
+
 def main():
     """
     Start a loop that continues until a valid date is successfully processed.
@@ -14,27 +16,56 @@ def get_user_input():
     Prompt the user for a date input.
     Return the user's input.
     """
-    pass
+    # Prompt the user and capture the input
+    user_date = input("Date: ")
+    # Return the captured input
+    return user_date
 
 def parse_date(user_input):
-    """
-    Check if user_input matches the numeric "MM/DD/YYYY" format.
-        If yes, split the input by "/" to extract the month, day, and year.
-            Convert these components into integers or keep them as strings but ensure they are valid (e.g., month is between 1 and 12).
-            Return these components as a tuple or a dictionary.
-        If the first check fails, check if user_input matches the "Month DD, YYYY" format.
-            If yes, identify the month, day, and year components, converting the month name to its numeric equivalent (e.g., "January" to 1).
-            Return these components as a tuple or a dictionary.
-        If neither format matches, return an error state or None to indicate failure.
-    """
-    pass
+    # Define regex patterns for both date formats
+    numeric_date_pattern = re.compile(r"(\d{1,2})/(\d{1,2})/(\d{4})")
+    textual_date_pattern = re.compile(r"([a-zA-Z]+) (\d{1,2}), (\d{4})")
+
+    # List of month names to help convert textual month to numeric
+    months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+    # Check for numeric "MM/DD/YYYY" format
+    numeric_match = numeric_date_pattern.match(user_input)
+    if numeric_match:
+        month, day, year = numeric_match.groups()
+        month, day, year = int(month), int(day), int(year)
+        # Validate the components (e.g., month is between 1 and 12)
+        if 1 <= month <= 12:
+            return {"month": month, "day": day, "year": year}
+    
+    # Check for "Month DD, YYYY" format
+    textual_match = textual_date_pattern.match(user_input)
+    if textual_match:
+        month_name, day, year = textual_match.groups()
+        day, year = int(day), int(year)
+        if month_name in months:
+            month = months.index(month_name) + 1  # Convert month name to its numeric equivalent
+            return {"month": month, "day": day, "year": year}
+
+    # If neither format matches, return an error state or None
+    return None
 
 def format_date(date_components):
     """
-    - Extract year, month, and day from the date components.
-    - Format the date in YYYY-MM-DD format, ensuring month and day are zero-padded to two digits.
-    - Return the formatted date string.
+    Extract year, month, and day from the date components.
+    Format the date in YYYY-MM-DD format, ensuring month and day are zero-padded to two digits.
+    Return the formatted date string.
     """
-    pass
+    # Extract year, month, and day from the date components
+    year = date_components["year"]
+    month = date_components["month"]
+    day = date_components["day"]
+
+    # Format the date in YYYY-MM-DD format, zero-padding month and day as needed
+    formatted_date = f"{year:04d}-{month:02d}-{day:02d}"
+
+    # Return the formatted date string
+    return formatted_date
+
 
 main()
