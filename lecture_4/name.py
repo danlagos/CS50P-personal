@@ -1,8 +1,8 @@
 from sys import argv
 
+# check for errors
 if len(argv) < 2:
-    print("Too few arguments")
-elif len(argv) > 2:
-    print("Too many arguments")
-else:
-    print("Hello, my name is", argv[1])
+    exit("Too few arguments")
+    
+for arg in argv[1:]:
+    print("Hello, my name is", arg)
