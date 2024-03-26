@@ -3,37 +3,38 @@ from pyfiglet import Figlet
 from random import choice
 
 def main():
-    """
-    Contains the conditional logic to decide whether to use a random font or a specific font based on command-line arguments.
-    Calls the function to parse command-line arguments and retrieve the font name if specified.
-    Calls the function to accept user input (the text to be transformed).
-    Determines which font to use (random or specific) and sets it using pyfiglet.
-    Renders the text in the chosen font and displays the output.
-    """
     figlet = Figlet()
     fonts = figlet.getFonts()
-    
-    if len(sys.argv) == 1:
-        random_font = choice(fonts)
-        figlet.setFont(font=random_font)
-        user_input = take_input()
-        print(figlet.renderText(user_input))
-    elif len(sys.argv) == 3:
-        pass
 
+    # If no arguments, use a random font; else, parse CLI arguments for font selection
+    if len(sys.argv) == 1:
+        font_name = choice(fonts)  # Select a random font if no arguments are provided
+    else:
+        font_name = parse_cli_arguments()  # This will handle argument parsing and validation
+
+    # Set the font based on the name determined above
+    if font_name in fonts:
+        figlet.setFont(font=font_name)
+    else:
+        sys.exit(f"Error: The font '{font_name}' is not available.")
+
+    # Prompt the user for input text and render it using the selected font
+    user_input = take_input()
+    print(figlet.renderText(user_input))
 
 def take_input():
-    user_input = input("Input: ")
-    return user_input
+    """Prompt the user for text input."""
+    return input("Input: ")
 
 def parse_cli_arguments():
     """
-    Checks if the correct number of arguments is provided (either 0 or 2 for this specific use case).
-    If two arguments are provided, it validates the first argument to ensure it's either -f or --font and checks that the second argument corresponds to a valid font name.
-    Depending on the validation, it either returns the font name specified by the user or signals to use a random font.
-    In case of incorrect arguments, it exits the program with an error message using sys.exit.
+    Parses command-line arguments to validate the font flag and font name.
+    Returns the font name if specified and valid; exits with an error if invalid.
     """
-    pass
+    if len(sys.argv) == 3 and (sys.argv[1] == "-f" or sys.argv[1] == "--font"):
+        return sys.argv[2]  # Return the font name specified by the user
+    else:
+        sys.exit("Usage: python figlet.py [-f --font] [fontname]")
 
 if __name__ == "__main__":
     main()
