@@ -10,7 +10,17 @@ def main():
     Determines which font to use (random or specific) and sets it using pyfiglet.
     Renders the text in the chosen font and displays the output.
     """
-    pass
+    figlet = Figlet()
+    fonts = figlet.getFonts()
+    
+    if len(sys.argv) == 1:
+        random_font = choice(fonts)
+        figlet.setFont(font=random_font)
+        user_input = take_input()
+        print(figlet.renderText(user_input))
+    elif len(sys.argv) == 3:
+        pass
+
 
 def take_input():
     user_input = input("Input: ")
