@@ -11,7 +11,7 @@ def main ():
 def take_input():
     """
     Prompt the user for names in a loop.
-    Handle EOFError to break the loop when Ctrl-D is pressed.
+    Handle EOFError and KeyboardInterrupt to break the loop when Ctrl-D is pressed.
     Store and return the names in a list.
     """
     list_of_names = []  # Initialize the list outside of the loop
