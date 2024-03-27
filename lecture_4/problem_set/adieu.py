@@ -14,13 +14,31 @@ def take_input():
     Handle EOFError to break the loop when Ctrl-D is pressed.
     Store and return the names in a list.
     """
-    pass
+    list_of_names = []  # Initialize the list outside of the loop
+    while True:
+        try:
+            name = input("Name: ")  # Get a single name input
+            list_of_names.append(name)  # Append the name to the list
+        except (EOFError, KeyboardInterrupt):
+            break  # Exit the loop when Ctrl-D is pressed
+    return list_of_names  # Return the list of names after exiting the loop
 
 def format_output(list_of_names):
     """ 
-    consider using inflect library
+    consider using inflect library here
     takes the list of names as input 
-    returns a formatted string according to the rules given (using commas and "and" appropriately).
+    returns a formatted string according to the rules given.
+    rules given:  
+        For one name, you simply return it; 
+        for two, join them with "and"; 
+        for three or more, join with commas and "and" for the last two names.
+    example output:
+        $ python adieu.py                                                               
+        Name: Liesl                                                                     
+        Name: Friedrich                                                                 
+        Name: Louisa                                                                    
+        Name:                                                                           
+        Adieu, adieu, to Liesl, Friedrich, and Louisa   
     """
     pass
 
