@@ -1,46 +1,57 @@
 import inflect
 
-def main ():
+def main():
     """
-    calls take_input() and stores in list_of_names
-    call format_output(list_of_names) update in list_of_names
-    print farewell message:  With the formatted list_of_names, prepare the final message to be printed to the console. Ensure it starts with "Adieu, adieu, to " followed by the formatted names
+    Main function to orchestrate the process:
+    1. Calls take_input() to collect names from the user.
+    2. Calls format_output() with the list of collected names to get a grammatically correct, formatted string.
+    3. Prints the farewell message with the formatted names.
     """
-    pass
+    list_of_names = take_input()
+    formatted_names = format_output(list_of_names)
+    print(f"Adieu, adieu, to {formatted_names}")
 
 def take_input():
     """
-    Prompt the user for names in a loop.
-    Handle EOFError and KeyboardInterrupt to break the loop when Ctrl-D is pressed.
-    Store and return the names in a list.
+    Collects names from the user in a loop. It prompts the user for names, one at a time.
+    The loop is terminated by the user pressing Ctrl-D (EOFError) or Ctrl-C (KeyboardInterrupt), signaling the end of input.
+    Stores the names in a list and returns this list at the end.
+    
+    Returns:
+        list_of_names (list): A list of names entered by the user.
     """
-    list_of_names = []  # Initialize the list outside of the loop
+    list_of_names = []  # Initialize the list to store names
     while True:
         try:
-            name = input("Name: ")  # Get a single name input
-            list_of_names.append(name)  # Append the name to the list
-        except (EOFError, KeyboardInterrupt):
-            break  # Exit the loop when Ctrl-D is pressed
-    return list_of_names  # Return the list of names after exiting the loop
+            name = input("Name: ")  # Prompt for a single name
+            if name:  # Only append non-empty names to the list
+                list_of_names.append(name)
+        except (EOFError, KeyboardInterrupt):  # Catch termination signals
+            break  # Exit the loop when termination signal is received
+    return list_of_names  # Return the collected names
 
 def format_output(list_of_names):
-    """ 
-    consider using inflect library here
-    takes the list of names as input 
-    returns a formatted string according to the rules given.
-    rules given:  
-        For one name, you simply return it; 
-        for two, join them with "and"; 
-        for three or more, join with commas and "and" for the last two names.
-    example output:
-        $ python adieu.py                                                               
-        Name: Liesl                                                                     
-        Name: Friedrich                                                                 
-        Name: Louisa                                                                    
-        Name:                                                                           
-        Adieu, adieu, to Liesl, Friedrich, and Louisa   
     """
-    pass
+    Formats a list of names into a grammatically correct string using the inflect library.
+    This function handles different cases:
+    - For one name, it returns just the name.
+    - For two names, it joins them with "and".
+    - For three or more names, it joins them with commas and "and" before the last name.
+    
+    Parameters:
+        list_of_names (list): The list of names to format.
+    
+    Returns:
+        formatted_names (str): A string of formatted names.
+    """
+    # Initialize the inflect engine
+    p = inflect.engine()
+    
+    # Use the engine to join the list of names into a formatted string
+    formatted_names = p.join(list_of_names)
+    
+    # Return the formatted string
+    return formatted_names
 
 if __name__ == "__main__":
     main()
