@@ -1,49 +1,51 @@
 import random
 
 def main():
-    # Call take_input with a prompt for level and validate it.
-    level = take_input("Enter a level (positive integer): ")
+    # Get the level from the user, ensuring it's a positive integer.
+    level = get_validated_input("Level: ", is_for_level=True)
     
-    # Generate a random number within the level range.
-    target_number = create_random_number(level)
+    # Generate a random target number within the specified level.
+    target_number = generate_random_number(level)
     
-    # Execute the guessing logic with the target number.
-    guessing_logic(target_number)
+    # Run the guessing game loop.
+    run_guessing_game(target_number)
 
-def take_input(prompt):
+def get_validated_input(prompt, is_for_level):
     """
-    Prompt the user with the given prompt,
-    Validate the input ensuring it's a positive integer,
-    Repeat the prompt if validation fails,
+    Repeatedly prompt the user with the given prompt until a valid positive integer is entered.
+    For level input, validate that it's a positive integer.
+    For guess input, additionally handle the case where the guess could be outside the valid range, if necessary.
     Return the validated integer.
     """
     while True:
-        # Display the prompt to the user and take input.
-        
-        # If the input is not a valid positive integer, reprompt the user.
-        # Else, return the valid input as an integer.
+        # Prompt user and take input
+        if is_for_level:
+            number = input(prompt)
+        # Check if the input is a positive integer
+        # If for level, simply ensure it's positive.
+        # If for guess, further validation can be applied based on game logic (if necessary).
+        pass
     
-def create_random_number(max_value):
+def generate_random_number(max_value):
     """
-    Generate and return a random number between 1 and max_value (inclusive),
-    where max_value is the input level from the user.
+    Generate a random number between 1 and max_value (inclusive) using the random module.
+    Return this number as the target for the game.
     """
-    # Use random.randint(1, max_value) to generate the number.
+    # Use random.randint(1, max_value)
     
-def guessing_logic(target):
+def run_guessing_game(target):
     """
-    Loop to prompt the user to guess the target number,
-    Take user's guess using take_input with a guess-specific prompt,
-    Compare the guess to the target number and provide feedback:
-        - If guess is too low, print "Too small!" and prompt again.
-        - If guess is too high, print "Too large!" and prompt again.
-        - If guess is correct, print "Just right!" and exit the loop.
+    Prompt the user to guess the target number, providing feedback for each guess.
+    Tell the user if their guess is too small, too large, or just right.
+    Repeat until the correct guess is made.
     """
     while True:
-        # Prompt for a guess.
+        # Prompt user for a guess and validate it's a positive integer
         
-        # Compare guess to the target number and provide appropriate feedback.
-        # If the guess is correct, break out of the loop.
+        # If guess is smaller than target, inform the user it's too small.
+        # If guess is larger than target, inform the user it's too large.
+        # If guess matches the target, congratulate the user and break the loop.
+        pass
         
 if __name__ == "__main__":
     main()
