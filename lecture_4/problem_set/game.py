@@ -1,61 +1,49 @@
 import random
 
 def main():
-    # Prompt the user to enter a game level as a positive integer.
+    # Prompt the user for a level, ensuring it's a positive integer, then start the guessing game.
     level = get_validated_input("Level: ")
-    
-    # Generate a target number within the range of 1 to the chosen level.
     target_number = generate_random_number(level)
-    
-    # Initiate the guessing game, where the user tries to guess the target number.
     run_guessing_game(target_number)
 
 def get_validated_input(prompt):
     """
-    Repeatedly prompt the user until a valid positive integer is entered.
-    This function is used for both getting the game level and the user's guesses.
-    It ensures that the input is not only an integer but also a positive one.
-    Returns the validated integer.
+    Repeatedly prompt the user with the given prompt until a valid positive integer is entered.
+    This function ensures that input is a positive integer, suitable for both getting the game level
+    and the user's guesses. Invalid or non-positive inputs result in reprompting.
     """
     while True:
-        user_input = input(prompt)  # Request input from the user.
+        user_input = input(prompt)  # Request input from the user as a string.
         try:
-            # Convert the input from a string to an integer.
-            user_input_as_int = int(user_input)
-            # Check if the integer is positive; if not, reprompt the user.
+            user_input_as_int = int(user_input)  # Attempt to convert the input to an integer.
             if user_input_as_int > 0:
-                return user_input_as_int
-            else:
-                print("Please enter a positive integer.")
+                return user_input_as_int  # Return the integer if it's positive.
+            # If the input is not positive, the loop continues, implicitly reprompting the user.
         except ValueError:
-            # If the input cannot be converted to an integer, notify the user and reprompt.
-            print("Invalid input. Please enter a positive integer.")
+            # If the input cannot be converted to an integer, the loop continues, implicitly reprompting.
+            continue
 
 def generate_random_number(max_value):
     """
-    Generates a random integer within the inclusive range between 1 and the provided max_value.
-    This random number serves as the target for the user to guess.
+    Generates a random integer between 1 and max_value (inclusive).
+    This serves as the target number for the user to guess.
     """
     return random.randint(1, max_value)
     
 def run_guessing_game(target):
     """
-    Conducts the guessing game by prompting the user to guess the randomly generated target number.
-    It provides feedback on each guess - indicating if it's too high, too low, or correct.
-    The game continues until the user correctly guesses the target number.
+    Manages the guessing game, prompting the user to guess the target number
+    and providing feedback until the correct number is guessed.
     """
     while True:
-        # Request a guess from the user, ensuring it is a positive integer.
-        user_guess = get_validated_input("Guess: ")
-        # Compare the guess to the target number and provide appropriate feedback.
+        user_guess = get_validated_input("Guess: ")  # Validate the guess as a positive integer.
         if user_guess < target:
             print("Too small!")
         elif user_guess > target:
             print("Too large!")
         else:
-            # When the guess is correct, congratulate the user and exit the loop.
             print("Just right!")
-            break
+            break  # Exit the loop when the guess is correct.
         
 if __name__ == "__main__":
     main()
