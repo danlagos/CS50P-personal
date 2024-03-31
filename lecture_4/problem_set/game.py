@@ -29,7 +29,7 @@ def generate_random_number(max_value):
     This serves as the target number for the user to guess.
     """
     return random.randint(1, max_value)
-    
+
 def run_guessing_game(target):
     """
     Manages the guessing game, prompting the user to guess the target number
