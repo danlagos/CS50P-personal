@@ -2,7 +2,7 @@ import random
 
 def main():
     # Get the level from the user, ensuring it's a positive integer.
-    level = get_validated_input("Level: ", is_for_level=True)
+    level = get_validated_input("Level: ")
     
     # Generate a random target number within the specified level.
     target_number = generate_random_number(level)
@@ -10,7 +10,7 @@ def main():
     # Run the guessing game loop.
     run_guessing_game(target_number)
 
-def get_validated_input(prompt, is_for_level):
+def get_validated_input(prompt):
     """
     Repeatedly prompt the user with the given prompt until a valid positive integer is entered.
     For level input, validate that it's a positive integer.
@@ -18,20 +18,23 @@ def get_validated_input(prompt, is_for_level):
     Return the validated integer.
     """
     while True:
-        # Prompt user and take input
-        if is_for_level:
-            number = input(prompt)
-        # Check if the input is a positive integer
-        # If for level, simply ensure it's positive.
-        # If for guess, further validation can be applied based on game logic (if necessary).
-        pass
-    
+        user_input = input(prompt)  # Take input as a string.
+        try:
+            # Attempt to convert the input to an integer.
+            user_input_as_int = int(user_input)
+            if (user_input_as_int <=0):
+                continue
+            return user_input_as_int  # Return the converted integer.
+        except ValueError:
+            # If conversion fails continue the loop.
+            continue
+        
 def generate_random_number(max_value):
     """
     Generate a random number between 1 and max_value (inclusive) using the random module.
     Return this number as the target for the game.
     """
-    # Use random.randint(1, max_value)
+    return random.randint(1, max_value)
     
 def run_guessing_game(target):
     """
@@ -41,11 +44,17 @@ def run_guessing_game(target):
     """
     while True:
         # Prompt user for a guess and validate it's a positive integer
-        
+        user_guess = get_validated_input("Guess: ")
         # If guess is smaller than target, inform the user it's too small.
+        if user_guess < target:
+            print("Too small!")
         # If guess is larger than target, inform the user it's too large.
+        elif user_guess > target:
+            print("Too large!")
         # If guess matches the target, congratulate the user and break the loop.
-        pass
+        elif user_guess == target:
+            print("Just right!")
+            break
         
 if __name__ == "__main__":
     main()
