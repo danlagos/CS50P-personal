@@ -1,5 +1,6 @@
 import requests
 import sys
+import json
 
 def main():
     """ 
@@ -13,7 +14,7 @@ def main():
     """
     number_of_bitcoin = validate_cli_arg()
     bitcoin_price_data = fetch_bitcoin_data()
-    current_bitcoin_price = parse_api_response()
+    current_bitcoin_price = parse_api_response(bitcoin_price_data)
     calculate_and_format_price(number_of_bitcoin, current_bitcoin_price)
 
 def validate_cli_arg():
@@ -41,9 +42,14 @@ def fetch_bitcoin_data():
     Returns:
     - A JSON object from the API containing the latest Bitcoin price information.
     """
-    pass
+    try:
+        response = requests.get('https://api.coindesk.com/v1/bpi/currentprice.json')
+        bitcoin_price_data = response.json()
+    except requests.RequestException:
+        sys.exit("request failed")
+    return bitcoin_price_data
 
-def parse_api_response():
+def parse_api_response(bitcoin_price_data):
     """ 
     Extracts the Bitcoin price in USD from the API's JSON response.
     Parameters:
