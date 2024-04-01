@@ -3,14 +3,13 @@ import sys
 import json
 
 def main():
-    """ 
-    Orchestrates the program's flow:
-    - Validates the command-line argument for the number of Bitcoins to calculate.
-    - Fetches the latest Bitcoin price from an external API.
-    - Parses the API response to extract the Bitcoin price.
-    - Calculates the cost of the specified amount of Bitcoin.
-    - Outputs the calculated cost in a user-friendly format.
-    Ensures smooth coordination between different parts of the program, handling data passing and result presentation.
+    """
+    Orchestrate the program's flow:
+    - Validate the command-line argument for the number of Bitcoins.
+    - Fetch the current Bitcoin price from the CoinDesk API.
+    - Parse the API response to extract the Bitcoin price in USD.
+    - Calculate and output the total cost for the specified amount of Bitcoin.
+    Coordinate data flow and result presentation within the program.
     """
     number_of_bitcoin = validate_cli_arg()
     bitcoin_price_data = fetch_bitcoin_data()
@@ -18,13 +17,11 @@ def main():
     calculate_and_format_price(number_of_bitcoin, current_bitcoin_price)
 
 def validate_cli_arg():
-    """ 
-    Checks if the program was called with a valid numerical argument representing the number of Bitcoins.
-    - Ensures there's exactly one numerical argument provided.
-    - Confirms the argument can be interpreted as a float (the amount of Bitcoin).
-    If these conditions are not met, the program exits, displaying an appropriate error message to the user.
-    Returns:
-    - The number of Bitcoins as a float if validation succeeds.
+    """
+    Validate the command-line argument:
+    - Ensure exactly one numerical argument is provided for the number of Bitcoins.
+    - Exit with an error message if the argument is missing or not a valid number.
+    Return the validated number of Bitcoins as a float.
     """
     if len(sys.argv) != 2:
         sys.exit("Missing command-line argument")
@@ -36,11 +33,10 @@ def validate_cli_arg():
     return number_of_bitcoin
 
 def fetch_bitcoin_data():
-    """ 
-    Contacts the CoinDesk Bitcoin Price Index API to obtain the current market price of Bitcoin.
-    Implements error handling to gracefully manage any issues with the API request, such as network errors.
-    Returns:
-    - A JSON object from the API containing the latest Bitcoin price information.
+    """
+    Fetch the current market price of Bitcoin from the CoinDesk API.
+    Handle request errors gracefully and exit with a message if the request fails.
+    Return the API response as a JSON object containing Bitcoin price information.
     """
     try:
         response = requests.get('https://api.coindesk.com/v1/bpi/currentprice.json')
@@ -50,26 +46,22 @@ def fetch_bitcoin_data():
     return bitcoin_price_data
 
 def parse_api_response(bitcoin_price_data):
-    """ 
-    Extracts the Bitcoin price in USD from the API's JSON response.
-    Parameters:
-    - The API response in JSON format, containing Bitcoin pricing information.
-    Carefully navigates the JSON structure to locate and return the current price of Bitcoin.
-    Returns:
-    - The price of Bitcoin as a float.
+    """
+    Extract the Bitcoin price in USD from the provided API JSON response.
+    Parameter:
+    - bitcoin_price_data: JSON object containing Bitcoin pricing information.
+    Return the Bitcoin price in USD as a float.
     """
     current_bitcoin_price = bitcoin_price_data["bpi"]["USD"]["rate_float"]
     return current_bitcoin_price
 
 def calculate_and_format_price(number_of_bitcoin, current_bitcoin_price):
-    """ 
-    Utilizes the current Bitcoin price and the desired amount (in Bitcoins) to calculate total cost.
-    - Computes the cost based on the user-specified amount and the latest price.
-    - Formats the result to match currency standards (e.g., comma as thousands separator, four decimal places).
+    """
+    Calculate the total cost for a specified amount of Bitcoin and format the output.
     Parameters:
-    - Number of Bitcoins desired (float).
-    - Current price of Bitcoin (float).
-    Outputs the formatted string directly or returns it for display, depending on implementation preference.
+    - number_of_bitcoin: The desired amount of Bitcoin to calculate for (float).
+    - current_bitcoin_price: The current price of Bitcoin in USD (float).
+    Output the formatted cost to four decimal places, with a comma as the thousands separator.
     """
     amount = number_of_bitcoin * current_bitcoin_price
     print(f"${amount:,.4f}")
