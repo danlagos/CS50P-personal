@@ -58,7 +58,8 @@ def parse_api_response(bitcoin_price_data):
     Returns:
     - The price of Bitcoin as a float.
     """
-    pass
+    current_bitcoin_price = bitcoin_price_data["bpi"]["USD"]["rate_float"]
+    return current_bitcoin_price
 
 def calculate_and_format_price(number_of_bitcoin, current_bitcoin_price):
     """ 
@@ -70,7 +71,8 @@ def calculate_and_format_price(number_of_bitcoin, current_bitcoin_price):
     - Current price of Bitcoin (float).
     Outputs the formatted string directly or returns it for display, depending on implementation preference.
     """
-    pass
+    amount = number_of_bitcoin * current_bitcoin_price
+    print(f"${amount:,.4f}")
 
 if __name__ == "__main__":
     main()
