@@ -17,7 +17,16 @@ def get_level():
     Use a loop to keep asking until a valid input (1, 2, or 3) is received.
     Return the validated level.
     """
-    pass
+    while True:  # Loop until a valid level is received
+        try:
+            level = int(input("Level: "))
+            if level in [1, 2, 3]:
+                return level
+            else:
+                raise ValueError  # Not a valid level, will be caught and cause a reprompt
+        except ValueError:
+            # Invalid input, will cause the loop to continue and reprompt
+            pass
 
 def generate_integer(level):
     """ 
@@ -25,7 +34,14 @@ def generate_integer(level):
     Use the random library to generate numbers within the specified range for each level.
     Consider how to adjust the range of numbers based on the difficulty level.
     """
-    pass
+    if level == 1:
+        return random.randint(0, 9)  # Generate a single-digit integer
+    elif level == 2:
+        return random.randint(10, 99)  # Generate a two-digit integer
+    elif level == 3:
+        return random.randint(100, 999)  # Generate a three-digit integer
+    else:
+        raise ValueError("Invalid level")  # Should never be reached due to validation in get_level
 
 if __name__ == "__main__":
     main()
