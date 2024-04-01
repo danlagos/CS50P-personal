@@ -51,7 +51,7 @@ def generate_integer(level):
     """
     Based on the level, generate a non-negative integer with the appropriate number of digits.
     Use the random library to generate numbers within the specified range for each level.
-    Consider how to adjust the range of numbers based on the difficulty level.
+    Consider how to adjust the range of numbers based on the difficulty level.  not part of assignment.  this is extra.
     """
     # Generate and return a random single-digit integer (0-9)
     if level == 1:
