@@ -13,7 +13,7 @@ def main():
     """
     number_of_bitcoin = validate_cli_arg()
     bitcoin_price_data = fetch_bitcoin_data()
-    current_bitcoin_price = parse_api_response(bitcoin_price_data)
+    current_bitcoin_price = parse_api_response()
     calculate_and_format_price(number_of_bitcoin, current_bitcoin_price)
 
 def validate_cli_arg():
