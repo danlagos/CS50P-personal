@@ -9,7 +9,26 @@ def main():
     Provide immediate feedback ("EEE") for incorrect attempts.
     After three incorrect attempts, display the correct answer and move to the next problem.
     """
-    pass
+    level = get_level()
+    correct_answers = 0
+    for _ in range(10):  # Generate and solve 10 problems
+        x = generate_integer(level)
+        y = generate_integer(level)
+        attempts = 0
+        while attempts < 3:  # Allow up to 3 attempts per problem
+            user_answer = input(f"{x} + {y} = ")
+            try:
+                if int(user_answer) == x + y:
+                    correct_answers += 1
+                    break  # Correct answer, move to the next problem
+                else:
+                    raise ValueError  # Incorrect answer, handled in the except block
+            except ValueError:
+                print("EEE")  # Print error message for incorrect or invalid input
+                attempts += 1
+                if attempts == 3:
+                    print(f"{x} + {y} = {x+y}")  # Show the correct answer after 3 incorrect attempts
+    print(f"Score: {correct_answers} out of 10")  # Display final score
 
 def get_level():
     """
@@ -29,19 +48,23 @@ def get_level():
             pass
 
 def generate_integer(level):
-    """ 
+    """
     Based on the level, generate a non-negative integer with the appropriate number of digits.
     Use the random library to generate numbers within the specified range for each level.
     Consider how to adjust the range of numbers based on the difficulty level.
     """
+    # Generate and return a random single-digit integer (0-9)
     if level == 1:
-        return random.randint(0, 9)  # Generate a single-digit integer
+        return random.randint(0, 9) 
+    # Generate and return a random integer with up to two digits (0-99)
     elif level == 2:
-        return random.randint(10, 99)  # Generate a two-digit integer
+        return random.randint(0, 99)
+    # Generate and return a random integer with up to three digits (0-999)   
     elif level == 3:
-        return random.randint(100, 999)  # Generate a three-digit integer
+        return random.randint(0, 999)
+    # If the level is not 1, 2, or 3, raise a ValueError indicating an invalid level
     else:
-        raise ValueError("Invalid level")  # Should never be reached due to validation in get_level
+        raise ValueError("Invalid level")
 
 if __name__ == "__main__":
     main()
