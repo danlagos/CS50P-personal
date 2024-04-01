@@ -11,7 +11,10 @@ def main():
     - Outputs the calculated cost in a user-friendly format.
     Ensures smooth coordination between different parts of the program, handling data passing and result presentation.
     """
-    pass
+    number_of_bitcoin = validate_cli_arg()
+    bitcoin_price_data = fetch_bitcoin_data()
+    current_bitcoin_price = parse_api_response(bitcoin_price_data)
+    calculate_and_format_price(number_of_bitcoin, current_bitcoin_price)
 
 def validate_cli_arg():
     """ 
@@ -51,7 +54,7 @@ def parse_api_response():
     """
     pass
 
-def calculate_and_format_price():
+def calculate_and_format_price(number_of_bitcoin, current_bitcoin_price):
     """ 
     Utilizes the current Bitcoin price and the desired amount (in Bitcoins) to calculate total cost.
     - Computes the cost based on the user-specified amount and the latest price.
