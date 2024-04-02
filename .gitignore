@@ -2,3 +2,6 @@ Computer_Science_Plan.docx
 CS50P - ChatGPT Prompts.docx
 .vscode/
 .notes/
+__pycache__/
+.pytest_cache/
+*.pyc
