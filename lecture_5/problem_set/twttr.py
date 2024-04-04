@@ -9,12 +9,12 @@ def prompt_input():
     return tweet
 
 def shorten(word):
-    # takes message.  returns message without vowels
+    if not isinstance(word, str):
+        raise TypeError("Input must be a string")
     tweet = ""
     for letter in word:
-        if letter not in ["a","e", "i", "o", "u", "A", "E", "I", "O", "U"]:
+        if letter.lower() not in "aeiou":
             tweet += letter
-
     return tweet
 
 def provide_output(converted_message):
