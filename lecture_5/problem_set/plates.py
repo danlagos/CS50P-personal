@@ -22,4 +22,5 @@ def is_valid(s):
 
     return check_1 and check_2 and check_3 and check_4
 
-main()
+if __name__ == "__main__":
+    main()
