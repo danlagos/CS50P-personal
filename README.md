@@ -1,12 +1,12 @@
 # CS50P-personal
 
-Running CS50P on my own.  I am trying to create a record of my work in the even that I decide to get the certificaiton later.
+Running CS50P on my own.  I am trying to create a record of my work in the event that I decide to get the certificaiton later.  At the very least this will show my progression in Python.
 
-## Software practices
+## Software TTP's
 
 I intend to develop good software development practices and procedures.  These procedures are going to change as I progress through the course.  When I first started I devloped a systamatic technique of writing software the starts with psuedo code, outline functions (including structure of main() function) only then writing code.  As I went through the unit tests section, these procedures started to change to incorporate TDD.  Because I have not finished perfecting my TDD procedures, for the moment I will only outline my software developent procedures without them.  This section will soon be updated to incorporate them.  I am sure this will change once the course dives into FileI/O and OOP.
 
-by the way TTP is a military term.  Techniques, Tactic's and Procedures (TTP's).  The civilian wold calls them "best practices."
+By the way TTP is a military term.  Techniques, Tactic's and Procedures (TTP's).  The civilian wold calls them "best practices."
 
 Sofware TTP's
 
@@ -19,4 +19,4 @@ Sofware TTP's
 - Refine code.
 - When complete, refine pseudo code for readability.
 
-At some point I am going to have to incorporate writing documentation.  I have already talked about reficing this approach with TDD.  This is in the works.
+Very soon, I will incorporate writing documentation.  I have already talked about reficing this approach with TDD.  More to come!
