@@ -8,6 +8,10 @@ def main():
 def is_valid(s):
     check_1 = s[0:2].isalpha() # ensure starts with 2 letters
     check_2 = 6 >= len(s) >= 2 # maximum 6 char and min of 2 char
+    
+    # this should intoduce an error
+    #check_3 = all(letter.isalpha() or letter.isdigit() or letter in ['.', '-'] for letter in s)  # Incorrectly allows '.' and '-'
+
     check_3 = all(letter.isalpha() or letter.isdigit() for letter in s) # no punctuation
     check_4 = False # initialize variable that will check if numbers are at the end and first number is not '0'
     

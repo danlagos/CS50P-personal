@@ -27,10 +27,14 @@ def test_input_starts_with_a_digit_or_special_character():
     assert is_valid("1AB234") is False, 'Incorrectly validated plate not starting with two letters.'
 
 # Alphanumeric Only (No Special Characters or Spaces)
-def test_input_contains_only_letters_and_digits_but_invalid_due_to_letter_after_number():
-    # Simulate "input contains only letters and digits but is invalid due to a letter after a number sequence"
-    assert is_valid("AB123C") is False, 'Incorrectly validated plate with a letter following numbers.'
+def test_input_with_letter_after_number_sequence_is_invalid():
+    # Simulate "input contains letters and digits but is invalid due to a letter after a number sequence"
+    assert is_valid("AB123C") is False, 'Incorrectly validated plate with a letter following numbers, which is against the rules.'
 
+def test_input_should_not_allow_dot_and_dash():
+    # Simulate "input should not allow '.' or '-' according to the rules"
+    assert is_valid("AB.123") is False, "Incorrectly validated plate with a dot, which should be disallowed."
+    assert is_valid("AB-123") is False, "Incorrectly validated plate with a dash, which should be disallowed."
 
 def test_input_contains_special_characters_or_spaces():
     # Simulate "input contains special characters or spaces"
