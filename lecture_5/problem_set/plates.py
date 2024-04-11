@@ -9,10 +9,10 @@ def is_valid(s):
     check_1 = s[0:2].isalpha() # ensure starts with 2 letters
     check_2 = 6 >= len(s) >= 2 # maximum 6 char and min of 2 char
     
-    # this should intoduce an error
+    # this should intoduce an error, use this for tests in test_plates.py
     #check_3 = all(letter.isalpha() or letter.isdigit() or letter in ['.', '-'] for letter in s)  # Incorrectly allows '.' and '-'
 
-    check_3 = all(letter.isalpha() or letter.isdigit() for letter in s) # no punctuation
+    #check_3 = all(letter.isalpha() or letter.isdigit() for letter in s) # no punctuation
     check_4 = False # initialize variable that will check if numbers are at the end and first number is not '0'
     
     # Find the first digit in the string
@@ -23,8 +23,8 @@ def is_valid(s):
         # Check if the first digit is not '0'
         if first_digit_index == len(s) or s[first_digit_index] != '0':
             check_4 = True
-
-    return check_1 and check_2 and check_3 and check_4
+    # and check_3
+    return check_1 and check_2 and check_4
 
 if __name__ == "__main__":
     main()
