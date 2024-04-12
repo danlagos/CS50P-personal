@@ -24,7 +24,11 @@ def convert(fraction):
         raise ValueError("Negative numbers are not allowed.")
 
     percentage = round((numerator / denominator) * 100)
+    # this introduces an error.  I expect test_convert_valid_input to fail in test_fuel.py
+    # return str(max(0, min(100, percentage)))  # Mistakenly return a string instead of an integer
     return max(0, min(100, percentage))  # Ensure the percentage is clamped between 0 and 100.
+
+
 
 
 def gauge(percentage):
