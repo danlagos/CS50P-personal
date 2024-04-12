@@ -1,19 +1,20 @@
 import pytest
 from fuel import convert, gauge
 
+# tests for convert function
 def test_convert_non_integer_input():
     # simulate "input of 'three/four'" expect "to raise ValueError" failure message "Expected ValueError for non-integer values"
-    with pytest.raises(ValueError, match="Expected ValueError for non-integer values"):
+    with pytest.raises(ValueError, match="Please enter both numerator and denominator as integers."):
         convert("three/four")
 
 def test_convert_numerator_greater_than_denominator():
     # simulate "input of '5/4'" expect "to raise ValueError" failure message "Expected ValueError when numerator is greater than denominator"
-    with pytest.raises(ValueError, match="Expected ValueError when numerator is greater than denominator"):
+    with pytest.raises(ValueError, match="Numerator must not be larger than denominator."):
         convert("5/4")
 
 def test_convert_zero_denominator():
     # simulate "input of '1/0'" expect "to raise ZeroDivisionError" failure message "Expected ZeroDivisionError for zero denominator"
-    with pytest.raises(ZeroDivisionError, match="Expected ZeroDivisionError for zero denominator"):
+    with pytest.raises(ZeroDivisionError, match="Denominator cannot be zero."):
         convert("1/0")
 
 def test_convert_valid_input():
@@ -22,9 +23,10 @@ def test_convert_valid_input():
 
 def test_convert_negative_numbers():
     # simulate "input of '-1/10'" expect "to raise ValueError" failure message "Expected ValueError for negative numbers"
-    with pytest.raises(ValueError, match="Expected ValueError for negative numbers"):
+    with pytest.raises(ValueError, match="Negative numbers are not allowed."):
         convert("-1/10")
 
+#tests for gauge function
 def test_gauge_low_boundary():
     # simulate "input of 1" expect "to return 'E'" failure message "Expected 'E' for input of 1"
     assert gauge(1) == "E", "Expected 'E' for input of 1"
