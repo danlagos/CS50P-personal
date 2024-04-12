@@ -37,6 +37,9 @@ def gauge(percentage):
     elif percentage >= 99:
         return "F"
     else:
+
+        # Introducing an error by omitting the '%' character in the result string
+        # return f"{percentage}"  # Mistakenly omit '%' for normal percentage values
         return f"{percentage}%"
 
 if __name__ == "__main__":
