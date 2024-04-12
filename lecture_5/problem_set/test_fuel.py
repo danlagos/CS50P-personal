@@ -61,3 +61,22 @@ def test_convert_negative_numbers():
     with pytest.raises(ValueError, match="Expected ValueError for negative numbers"):
         convert("-1/10")
 
+def test_gauge_low_boundary():
+    # simulate "input of 1" expect "to return 'E'" failure message "Expected 'E' for input of 1"
+    assert gauge(1) == "E", "Expected 'E' for input of 1"
+
+def test_gauge_high_boundary():
+    # simulate "input of 99" expect "to return 'F'" failure message "Expected 'F' for input of 99"
+    assert gauge(99) == "F", "Expected 'F' for input of 99"
+
+def test_gauge_normal_percentage():
+    # simulate "input of 25" expect "to return '25%'" failure message "Expected '25%' for input of 25"
+    assert gauge(25) == "25%", "Expected '25%' for input of 25"
+
+def test_gauge_zero_input():
+    # simulate "input of 0" expect "to return 'E'" failure message "Expected 'E' for input of 0"
+    assert gauge(0) == "E", "Expected 'E' for input of 0"
+
+def test_gauge_one_hundred_input():
+    # simulate "input of 100" expect "to return 'F'" failure message "Expected 'F' for input of 100"
+    assert gauge(100) == "F", "Expected 'F' for input of 100"
