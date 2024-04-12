@@ -1,25 +1,39 @@
+from fuel import convert, gauge
+
 """
-Test for 75% Fuel Level
-simulate "input of 3/4" expect "75%" failure message "Expected 75% when input is 3/4"
 
-Test for 25% Fuel Level
-simulate "input of 1/4" expect "25%" failure message "Expected 25% when input is 1/4"
+Tests for convert function:
 
-Test for Full Tank
-simulate "input of 4/4" expect "F" failure message "Expected F for full tank when input is 4/4"
+Handling Non-Integer Input
+simulate "input of 'three/four'" expect "to raise ValueError" failure message "Expected ValueError for non-integer values"
 
-Test for Empty Tank
-simulate "input of 0/4" expect "E" failure message "Expected E for empty tank when input is 0/4"
+Numerator Greater Than Denominator
+simulate "input of '5/4'" expect "to raise ValueError" failure message "Expected ValueError when numerator is greater than denominator"
 
-Test for Zero Division Error Handling
-simulate "input of 4/0" expect "to re-prompt user" failure message "Expected to re-prompt user on zero denominator"
+Zero Denominator
+simulate "input of '1/0'" expect "to raise ZeroDivisionError" failure message "Expected ZeroDivisionError for zero denominator"
 
-Test for Non-Integer Input Handling
-simulate "input of three/four" expect "to re-prompt user" failure message "Expected to re-prompt user on non-integer input"
+Valid Input Conversion
+simulate "input of '50/100'" expect "to return 50" failure message "Expected 50% when input is 50/100"
 
-Test for Decimal Input Handling
-simulate "input of 1.5/3" expect "to re-prompt user" failure message "Expected to re-prompt user on decimal input"
+Negative Number Handling
+simulate "input of '-1/10'" expect "to raise ValueError" failure message "Expected ValueError for negative numbers"
 
-Test for Invalid Fraction Input
-simulate "input of 5/4" expect "to re-prompt user" failure message "Expected to re-prompt user when numerator is larger than denominator"
+Tests for gauge function:
+
+Low Boundary Condition for 'E'
+simulate "input of 1" expect "to return 'E'" failure message "Expected 'E' for input of 1"
+
+High Boundary Condition for 'F'
+simulate "input of 99" expect "to return 'F'" failure message "Expected 'F' for input of 99"
+
+Percentage Display for Normal Range
+simulate "input of 25" expect "to return '25%'" failure message "Expected '25%' for input of 25"
+
+Edge Case for Low Percentage
+simulate "input of 0" expect "to return 'E'" failure message "Expected 'E' for input of 0"
+
+Edge Case for High Percentage
+simulate "input of 100" expect "to return 'F'" failure message "Expected 'F' for input of 100"
+
 """
