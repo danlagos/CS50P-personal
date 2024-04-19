@@ -1,24 +1,4 @@
 """
-Function: validate_arguments
-
-    simulate passing no arguments expect sys.exit with 'Too few command-line arguments', 
-        failure message "Function did not exit with 'Too few command-line arguments' when no arguments were provided."
-    simulate passing more than one argument expect sys.exit with 'Too many command-line arguments', 
-        failure message "Function did not exit with 'Too many command-line arguments' when multiple arguments were provided."
-    simulate passing a file name with a non-.py extension expect sys.exit with 'Not a Python file', 
-        failure message "Function did not exit with 'Not a Python file' when a non-Python file was provided."
-    simulate passing a non-existent file name expect sys.exit with 'File does not exist', 
-        failure message "Function did not exit with 'File does not exist' when a nonexistent file was provided."
-    simulate passing one valid .py file that exists expect return of the validated file path, 
-        failure message "Function did not return the correct file path when a valid Python file was provided."
-
-Function: process_file
-
-    simulate processing a file containing only comments and blank lines expect return count of 0 valid lines, 
-        failure message "Function did not return a count of 0 for a file with only comments and blank lines."
-    simulate processing a file with mixed content (comments, blank lines, and valid code) expect return count 
-    of valid lines excluding comments and blanks, 
-        failure message "Function did not return the correct count of valid lines for a file with mixed content."
 
 Function: output_result
 
@@ -40,9 +20,10 @@ Function: main
 """
 
 import pytest
-from unittest.mock import patch
-from lines import validate_arguments  # Replace 'your_module' with the actual name of your module where the function is defined.
+from unittest.mock import mock_open, patch
+from lines import validate_arguments, process_file  
 
+# unit tests for validate_arguments()
 def test_no_arguments():
     # Simulate passing no arguments expect sys.exit with 'Too few command-line arguments', failure message "Function did not exit with 'Too few command-line arguments' when no arguments were provided."
     with pytest.raises(SystemExit) as e:
@@ -73,3 +54,22 @@ def test_valid_file(mocker):
     mocker.patch('os.path.exists', return_value=True)
     result = validate_arguments(['valid.py'])
     assert result == 'valid.py', "Function did not return the correct file path when a valid Python file was provided."
+
+# unit tests for process_file()
+def test_process_file_only_comments_and_blanks():
+    # Simulate processing a file containing only comments and blank lines expect return count of 0 valid lines, 
+    # failure message "Function did not return a count of 0 for a file with only comments and blank lines."
+    mock_file_content = "# This is a comment\n\n    # Another comment line\n \n"
+    with patch("builtins.open", mock_open(read_data=mock_file_content)):
+        result = process_file("dummy_file.py")
+    assert result == 0, "Function did not return a count of 0 for a file with only comments and blank lines."
+
+def test_process_file_with_mixed_content():
+    # Simulate processing a file with mixed content (comments, blank lines, and valid code) expect return count 
+    # of valid lines excluding comments and blanks, 
+    # failure message "Function did not return the correct count of valid lines for a file with mixed content."
+    mock_file_content = "# This is a comment\n\ndef foo():\n    pass\n\n# Another comment\n\nprint('Hello')\n"
+    with patch("builtins.open", mock_open(read_data=mock_file_content)):
+        result = process_file("dummy_file.py")
+    assert result == 2, "Function did not return the correct count of valid lines for a file with mixed content."
+
