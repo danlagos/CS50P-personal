@@ -1,13 +1,5 @@
 """
-
-Function: output_result
-
-    simulate input of 0 lines expect console output of '0', 
-        failure message "Function did not output '0' when input was 0 lines."
-    simulate input of 5 lines expect console output of '5', 
-        failure message "Function did not output '5' when input was 5 lines."
-
-Function: main
+Function: main, this is more integration testing than anything else.  Not implementing yet.
 
     simulate proper command-line argument handling and file processing with a valid .py file expect successful 
     execution and output of the line count, 
@@ -15,13 +7,11 @@ Function: main
     simulate handling errors such as 'Too few command-line arguments' when no arguments are provided expect 
     proper error handling and sys.exit, 
         failure message "Main function did not handle error 'Too few command-line arguments' properly."
-
-
 """
 
 import pytest
 from unittest.mock import mock_open, patch
-from lines import validate_arguments, process_file  
+from lines import validate_arguments, process_file, output_result
 
 # unit tests for validate_arguments()
 def test_no_arguments():
@@ -73,3 +63,17 @@ def test_process_file_with_mixed_content():
         result = process_file("dummy_file.py")
     assert result == 2, "Function did not return the correct count of valid lines for a file with mixed content."
 
+# Unit Test for output_result()
+def test_output_result_zero_lines():
+    # Simulate input of 0 lines expect console output of '0', 
+    # failure message "Function did not output '0' when input was 0 lines."
+    with patch("builtins.print") as mock_print:
+        output_result(0)
+        mock_print.assert_called_once_with('0', "Function did not output '0' when input was 0 lines.")
+
+def test_output_result_five_lines():
+    # Simulate input of 5 lines expect console output of '5', 
+    # failure message "Function did not output '5' when input was 5 lines."
+    with patch("builtins.print") as mock_print:
+        output_result(5)
+        mock_print.assert_called_once_with('5', "Function did not output '5' when input was 5 lines.")
