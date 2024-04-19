@@ -59,11 +59,12 @@ def validate_arguments(args):
 
 def process_file(file_path):
     """
-    Open and read the file line by line.
-    Use string methods to determine if a line should be counted or skipped.
-        Lines should be stripped of leading and trailing whitespace to accurately check for blank lines and comments.
-        Implement logic to skip lines that are either entirely whitespace or start with # (after whitespace is stripped).
-    Maintain a counter for valid lines of code, which are neither comments nor blank.
+    Use a context manager to open and handle the file to ensure it is closed after reading.
+    Iterate over each line of the file:
+        Strip whitespace from both ends of each line to accurately check for content.
+        Skip lines that are entirely whitespace or start with '#' as these are comments.
+        Maintain a counter for lines that contain actual code, excluding blank lines and comments.
+    Return the total count of valid lines of code, which excludes comments and blank spaces.
     """
     pass
 
