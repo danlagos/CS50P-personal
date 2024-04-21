@@ -7,22 +7,17 @@ def main():
     - Retrieves command-line arguments using sys.argv.
     - Handles command-line arguments through the validate_arguments() function.
     - If validations pass (i.e., correct number of arguments, proper file type, file exists):
-        - Processes the file with process_file() and captures the result (number of valid lines).
-        - Calls output_result() with the result from process_file() to display the final output.
+        - Processes the file with process_file() and directly prints the number of valid lines.
     - Handles any errors from validation by displaying appropriate error messages and exiting the program.
     """
     # Retrieve command-line arguments (excluding the script name itself, hence sys.argv[1:]).
     args = sys.argv[1:]
 
     # Validate arguments by passing them to the validate_arguments function.
-    # Expect validate_arguments to raise SystemExit with appropriate error messages for any issues.
     validated_file_path = validate_arguments(args)
     
-    # If validate_arguments returns without error, proceed to process the file.
-    count_of_lines = process_file(validated_file_path)
-    
-    # Output the result of the file processing.
-    output_result(count_of_lines)
+    # If validate_arguments returns without error, directly print the result from processing the file.
+    print(process_file(validated_file_path))
 
 def validate_arguments(args):
     """
@@ -74,9 +69,4 @@ def process_file(file_path):
                 valid_lines += 1
     return valid_lines
 
-def output_result(count_of_lines):
-    """
-    Takes input from process_file function
-    Return the count of non-comment, non-blank lines to the console as the final output.
-    """
-    pass
+

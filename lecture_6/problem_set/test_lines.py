@@ -63,17 +63,3 @@ def test_process_file_with_mixed_content():
         result = process_file("dummy_file.py")
     assert result == 3, "process_file() did not return the correct count of valid lines for a file with mixed content."
 
-# Unit Test for output_result()
-def test_output_result_zero_lines():
-    # Simulate input of 0 lines expect console output of '0', 
-    # failure message "Function did not output '0' when input was 0 lines."
-    with patch("builtins.print") as mock_print:
-        output_result(0)
-        mock_print.assert_called_once_with('0', "output_result() did not output '0' when input was 0 lines.")
-
-def test_output_result_five_lines():
-    # Simulate input of 5 lines expect console output of '5', 
-    # failure message "Function did not output '5' when input was 5 lines."
-    with patch("builtins.print") as mock_print:
-        output_result(5)
-        mock_print.assert_called_once_with('5', "output_result() did not output '5' when input was 5 lines.")
