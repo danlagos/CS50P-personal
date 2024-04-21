@@ -66,7 +66,13 @@ def process_file(file_path):
         Maintain a counter for lines that contain actual code, excluding blank lines and comments.
     Return the total count of valid lines of code, which excludes comments and blank spaces.
     """
-    pass
+    valid_lines = 0
+    with open(file_path, 'r') as file:
+        for line in file:
+            stripped_line = line.strip()
+            if stripped_line and not stripped_line.startswith('#'):
+                valid_lines += 1
+    return valid_lines
 
 def output_result(count_of_lines):
     """
