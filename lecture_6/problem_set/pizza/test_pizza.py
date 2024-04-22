@@ -8,17 +8,30 @@ Test for No Arguments:
     failure message: "Expected sys.exit() with 'Too few command-line arguments.' but got a different response 
         or no exit."
 
-Test for Exactly One Argument:
+Test for Single Argument Acceptance
     simulate: exactly one command-line argument provided (e.g., "filename.csv"),
-    expect: the function to return the filename "filename.csv",
-    failure message: "Expected function to return the filename 'filename.csv' 
-        but did not return correctly or returned an incorrect filename."
+    expect: the function to proceed without exiting and return the filename,
+    failure message: "Expected function to accept exactly one argument and proceed without error, 
+        but it did not."
 
 Test for More Than One Argument:
     simulate: more than one command-line argument provided (e.g., "filename.csv extra_arg"),
     expect: the function to display "Too many command-line arguments." and exit the program using sys.exit(),
     failure message: "Expected sys.exit() with 'Too many command-line arguments.' 
         but got a different response or no exit."
+
+Validation of File Extension
+    simulate: exactly one command-line argument provided with correct and incorrect extensions 
+        (e.g., "filename.csv" and "filename.txt"),
+    expect: the function to return the filename if it ends with ".csv", and to exit with an error 
+        message if not (e.g., "filename.txt"),
+    failure message: "Expected function to validate '.csv' extension and react appropriately, 
+        but it failed to do so."
+
+Test for Incorrect File Extension:
+    simulate: a command-line argument with a filename that does not end with ".csv" (e.g., "datafile.txt"),
+    expect: the function to display "Not a CSV file." and exit the program using sys.exit(),
+    failure message: "Expected sys.exit() with 'Not a CSV file.' but got a different response or no exit."
 
 """
 
