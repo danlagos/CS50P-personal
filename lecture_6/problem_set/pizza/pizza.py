@@ -35,6 +35,5 @@ def display_data(processed_data):
     """
     pass
 
-
 if __name__ == "__main__":
     main()
