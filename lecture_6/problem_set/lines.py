@@ -69,4 +69,5 @@ def process_file(file_path):
                 valid_lines += 1
     return valid_lines
 
-
+if __name__ == "__main__":
+    main()
