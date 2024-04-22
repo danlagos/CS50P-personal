@@ -1,5 +1,4 @@
 # Unit test for handle_cli_arguments()
-
 """
 
 Test for No Arguments:
@@ -36,7 +35,6 @@ Test for Incorrect File Extension:
 """
 
 # Unit tests for process_and_read_csv()
-
 """
 Test for File Does Not Exist:
     simulate: validated filename provided does not point to an existing file,
@@ -52,7 +50,6 @@ Test for Successful File Reading and Parsing:
 """
 
 # Unit tests for display_data()
-
 """
 Test for Proper Formatting and Display:
     simulate: providing processed data as a list of dictionaries,
