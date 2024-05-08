@@ -4,36 +4,40 @@ import sys
 
 def main():
     """
-    - Orchestrates the flow of the program.
-    - Use input() to prompt the user for their date of birth in the specified format (YYYY-MM-DD).
-    - Implement input validation to check if the input is in the correct format. 
-        -  Use a try-except block to attempt parsing the date with datetime.strptime(). 
-        -  If an exception is raised, use sys.exit() to terminate the program with a message 
-        indicating the date is invalid.
+    Orchestrates the flow of the program by prompting the user for their date of birth 
+    and calculating the time since then in minutes.
+
+    :raises SystemExit: If the date format is invalid, it terminates the program and 
+        indicates the error in the date input.
     """
     ...
 
 
-def calculate_date():
+
+def calculate_date(birthdate):
     """
-    - Convert the string to a date object.
-    - Retrieve today's date using date.today().
-    - Calculate the difference between today's date and the entered birthdate to get a 
-    timedelta object.
-    - Extract the total days from the timedelta object and convert this to minutes 
-    (multiply by 1440, the number of minutes in a day).
+    Calculates the difference in minutes from a given birthdate to today's date.
+
+    :param birthdate: The date of birth input by the user.
+    :type birthdate: date
+    :return: Total number of minutes from the birthdate to today's date.
+    :rtype: int
     """
     ...
 
 
-def convert_date_to_words():
+
+def format_minutes_as_words(minutes):
     """
-    - Initialize an inflect engine.
-    - Convert the total minutes number into words using the inflect method appropriate for 
-    converting numbers to words.
-    - Print this string to the console as per the format seen in the video.
+    Converts a given number of minutes into words.
+
+    :param minutes: Total number of minutes to be converted.
+    :type minutes: int
+    :return: The minutes expressed in words, without using conjunctions like 'and'.
+    :rtype: str
     """
     ...
+
 
 
 if __name__ == "__main__":
