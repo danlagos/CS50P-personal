@@ -6,10 +6,16 @@ class Jar:
         :param capacity: The maximum number of cookies the jar can hold, default is 12.
         :type capacity: int
         :raises ValueError: If the input capacity is not a non-negative integer, with the message 'Capacity must be a non-negative integer.'
-        :ivar size: The current number of cookies in the jar, initially set to 0.
-        :vartype size: int
+        :ivar _capacity: The maximum capacity of the jar, set at initialization and immutable thereafter.
+        :vartype _capacity: int
+        :ivar _size: The current number of cookies in the jar, initially set to 0, modifiable via deposit() and withdraw().
+        :vartype _size: int
         """
-        ...
+        if not isinstance(capacity, int) or capacity < 0:
+            raise ValueError("Capacity must be a non-negative integer.")
+        self._capacity = capacity  # Use a private attribute to store capacity
+        self._size = 0  # Use a private attribute to store size
+
 
     def __str__(self):
         """
@@ -22,6 +28,7 @@ class Jar:
         """
         ...
 
+
     def deposit(self, n):
         """
         Add n cookies to the jar.
@@ -31,6 +38,7 @@ class Jar:
         :raises ValueError: If adding n cookies exceeds the jar's capacity, with the message 'Capacity exceeded.'
         """
         ...
+
 
     def withdraw(self, n):
         """
@@ -42,6 +50,7 @@ class Jar:
         """
         ...
 
+
     @property
     def capacity(self):
         """
@@ -50,7 +59,8 @@ class Jar:
         :return: The maximum capacity of the jar.
         :rtype: int
         """
-        ...
+        return self._capacity
+
 
     @property
     def size(self):
@@ -62,4 +72,4 @@ class Jar:
         :return: The current number of cookies in the jar.
         :rtype: int
         """
-        ...
+        return self._size
