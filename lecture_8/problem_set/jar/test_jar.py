@@ -82,6 +82,41 @@ def test_deposit_at_capacity():
     assert str(exc_info.value) == "Capacity exceeded."
 
 
-# Unit test for withdraw()
-def test_withdraw():
-    ...
+# Unit tests for withdraw()
+def test_withdraw_valid():
+    # Test that withdrawing a valid number of cookies updates the size correctly
+    jar = Jar(capacity=10)
+    jar.deposit(8)
+    jar.withdraw(3)
+    assert jar.size == 5
+
+def test_withdraw_exceed_size():
+    # Test that attempting to withdraw more cookies than are currently in the jar raises a ValueError
+    jar = Jar(capacity=10)
+    jar.deposit(5)
+    with pytest.raises(ValueError) as exc_info:
+        jar.withdraw(6)
+    assert str(exc_info.value) == "Insufficient cookies."
+
+def test_withdraw_negative_value():
+    # Test that attempting to withdraw a negative number of cookies raises a ValueError
+    jar = Jar(capacity=10)
+    jar.deposit(5)
+    with pytest.raises(ValueError) as exc_info:
+        jar.withdraw(-3)
+    assert str(exc_info.value) == "Cannot withdraw negative cookies."
+
+def test_withdraw_zero():
+    # Test that withdrawing zero cookies does not change the size
+    jar = Jar(capacity=10)
+    jar.deposit(5)
+    jar.withdraw(0)
+    assert jar.size == 5
+
+def test_withdraw_multiple_times():
+    # Test that withdrawing cookies in multiple calls updates the size correctly
+    jar = Jar(capacity=10)
+    jar.deposit(8)
+    jar.withdraw(2)
+    jar.withdraw(3)
+    assert jar.size == 3

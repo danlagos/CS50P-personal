@@ -53,7 +53,11 @@ class Jar:
         :type n: int
         :raises ValueError: If attempting to remove more cookies than are currently in the jar, with the message 'Insufficient cookies.'
         """
-        ...
+        if not isinstance(n, int) or n < 0:
+            raise ValueError("Cannot withdraw negative cookies.")
+        if n > self._size:
+            raise ValueError("Insufficient cookies.")
+        self._size -= n
 
 
     @property
