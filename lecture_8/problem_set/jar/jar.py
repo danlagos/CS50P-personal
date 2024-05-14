@@ -26,7 +26,7 @@ class Jar:
         :return: A string of cookie emojis equal to the current number of cookies in the jar.
         :rtype: str
         """
-        ...
+        return "🍪" * self._size
 
 
     def deposit(self, n):
@@ -36,8 +36,13 @@ class Jar:
         :param n: Number of cookies to add.
         :type n: int
         :raises ValueError: If adding n cookies exceeds the jar's capacity, with the message 'Capacity exceeded.'
+                        If attempting to deposit a negative number of cookies, with the message 'Cannot deposit negative cookies.'
         """
-        ...
+        if not isinstance(n, int) or n < 0:
+            raise ValueError("Cannot deposit negative cookies.")
+        if self._size + n > self._capacity:
+            raise ValueError("Capacity exceeded.")
+        self._size += n
 
 
     def withdraw(self, n):
