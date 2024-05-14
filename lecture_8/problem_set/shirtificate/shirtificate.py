@@ -46,8 +46,8 @@ def add_title(pdf):
     :return: Updated PDF object with title added.
     :rtype: FPDF
     """
-    pdf.set_font("Arial", "B", 24)
-    pdf.cell(0, 10, "CS50 Shirtificate", align='C', ln=True)
+    pdf.set_font("Helvetica", "B", 24)  # Updated to use 'Helvetica'
+    pdf.cell(0, 10, "CS50 Shirtificate", align='C', new_x="LMARGIN", new_y="NEXT")  # Updated parameters
     return pdf
 
 
@@ -76,10 +76,16 @@ def overlay_user_name(pdf, name):
     :return: Updated PDF object with user's name added.
     :rtype: FPDF
     """
-    pdf.set_font("Arial", "B", 32)
+    pdf.set_font("Helvetica", "B", 32)  # Updated to use 'Helvetica'
     pdf.set_text_color(255, 255, 255)
-    # Assuming name should be centered horizontally on the shirt and positioned 1/4 from top of the shirt
-    pdf.text(x=55, y=120, txt=name)
+    
+    # Calculate the width of the name to center it horizontally
+    name_width = pdf.get_string_width(name)
+    page_width = 210  # A4 width in mm
+    x_position = (page_width - name_width) / 2
+
+    # Place the name at the calculated x position
+    pdf.text(x=x_position, y=120, text=name)  # Updated parameter
     return pdf
 
 
